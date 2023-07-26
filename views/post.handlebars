@@ -1,0 +1,26 @@
+<div class="text-center">
+  <h2>{{title}}</h2>
+  <p>{{{get_emoji}}}</p>
+  <p>{{content}}</p>
+  <p>Created by {{user.name}} on {{format_date date_created}}</p>
+
+{{#if comments.length}}
+  <div class="col-md-6 comment-list">
+    <h3>Comments:</h3>
+
+    {{#each comments as |comment|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/comment/{{comment.id}}">{{comment.content}}</a></h4>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  <p>
+    <a href="/comment">Comment on this Post</a>
+  </p>
+</div>
+
+<script src="./js/post.js"></script>
