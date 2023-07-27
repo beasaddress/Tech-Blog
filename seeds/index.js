@@ -13,17 +13,15 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  for (const post of postData) {
-    await Post.create({
-      ...post,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  const posts = await Promise.all(postData.map(post => Post.create({
+    ...post,
+    user_id: users[Math.floor(Math.random() * users.length)].id,
+  })));
 
-  for (const comment of commentData) {
+  for (const post of posts) {
     await Comment.create({
-      ...comment,
-      post_id: users[Math.floor(Math.random() * users.length)].id,
+      ...commentData[Math.floor(Math.random() * commentData.length)],
+      post_id: post.id,
     });
   }
 
